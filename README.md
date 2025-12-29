@@ -57,32 +57,79 @@ Nhóm nghiên cứu và áp dụng hai thuật toán:
 | **Precision** | Cao | Cao hơn |
 | **Stability** | Trung bình | Tốt (dựa trên Learning Curve) |
 
-## 6. Hướng dẫn chạy dự án
+## 6. Hướng dẫn cài đặt và chạy dự án
 
-### Bước 1: Cài đặt môi trường (Khuyên dùng Virtual Environment)
-
-Mở Terminal (hoặc CMD/PowerShell) tại thư mục gốc của dự án và thực hiện các lệnh sau:
-
-**1. Tạo môi trường ảo:**
-* *Windows:*
+### Bước 1: Chuẩn bị môi trường
+Yêu cầu máy tính đã cài đặt Python 3.8+.
+1.  **Tạo và kích hoạt môi trường ảo (Khuyên dùng):**
+    * Windows:
+        ```bash
+        python -m venv venv
+        .\venv\Scripts\activate
+        ```
+    * macOS/Linux:
+        ```bash
+        python3 -m venv venv
+        source venv/bin/activate
+        ```
+2.  **Cài đặt thư viện:**
     ```bash
-    python -m venv venv
-    ```
-* *macOS/Linux:*
-    ```bash
-    python3 -m venv venv
-    ```
-
-**2. Kích hoạt môi trường ảo:**
-* *Windows:*
-    ```bash
-    .\venv\Scripts\activate
-    ```
-* *macOS/Linux:*
-    ```bash
-    source venv/bin/activate
+    pip install -r requirements.txt
     ```
 
-**3. Cài đặt các thư viện cần thiết:**
-```bash
-pip install -r requirements.txt
+### Bước 2: Chạy Training (Huấn luyện mô hình)
+Phần này giúp bạn xem lại quy trình phân tích dữ liệu (EDA), tiền xử lý và huấn luyện lại mô hình nếu cần.
+
+1.  **Khởi động Jupyter Notebook:**
+    Tại terminal (đang ở thư mục gốc), chạy lệnh:
+    ```bash
+    jupyter notebook
+    ```
+2.  **Mở file:**
+    Trình duyệt sẽ mở ra. Truy cập vào thư mục `demo/` và chọn file `Sleep_health.ipynb`.
+3.  **Thực thi:**
+    Chọn menu **Cell > Run All** để chạy toàn bộ các bước từ đọc dữ liệu đến vẽ biểu đồ đánh giá.
+
+### Bước 3: Chạy Demo (Ứng dụng dự đoán)
+Đây là ứng dụng giao diện Web cho phép người dùng nhập thông tin và nhận kết quả dự đoán chất lượng giấc ngủ.
+
+1.  **Chạy lệnh Streamlit:**
+    Tại terminal (đang ở thư mục gốc), chạy lệnh:
+    ```bash
+    streamlit run app/app.py
+    ```
+2.  **Sử dụng:**
+    * Trình duyệt sẽ tự động mở địa chỉ (thường là `http://localhost:8501`).
+    * Nhập các chỉ số sức khỏe vào thanh bên trái (Sidebar).
+    * Nhấn nút dự đoán để xem kết quả và lời khuyên.
+
+## 7. Cấu trúc thư mục dự án
+Dự án được tổ chức theo cấu trúc chuẩn như sau:
+
+```text
+Sleep_Quality_Project/
+│
+├── app/
+│   └── app.py                      # Source code chính của ứng dụng Web (Streamlit)
+│
+├── data/
+│   └── Sleep_health_and_lifestyle_dataset.csv  # Dữ liệu gốc sử dụng cho huấn luyện
+│
+├── demo/
+│   └── Sleep_health.ipynb          # Notebook dùng để phân tích dữ liệu (EDA) và thử nghiệm mô hình
+│
+├── reports/
+│   └── slepp-quality-prec_Report.docx               # Báo cáo
+│
+├── slides/
+│   └── Sleep_quality.pptx   # Slide báo cáo
+│
+├── venv/                           # Thư mục môi trường ảo
+├── .gitignore                      # Cấu hình các file GitHub cần bỏ qua
+├── requirements.txt                # Danh sách các thư viện Python cần thiết
+└── README.md                       # Tài liệu hướng dẫn sử dụng
+```
+
+## 8. Tác giả
+* Đỗ Văn Ngọc: Mã sinh viên 12423026 lớp 124231
+* Đoàn Nhật Anh: Mã sinh viên 12423043 lớp 124231
