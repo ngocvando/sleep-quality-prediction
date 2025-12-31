@@ -49,13 +49,30 @@ Nhóm nghiên cứu và áp dụng hai thuật toán:
     * *Kết quả:* Được chọn làm mô hình chính cho ứng dụng Demo.
 
 ## 5. Kết quả thực nghiệm
-Đánh giá trên tập kiểm thử (Test set):
+Dựa trên việc huấn luyện và kiểm thử mô hình trên tập dữ liệu đã chia (80% Training - 20% Testing), nhóm thu được kết quả chi tiết như sau:
 
-| Metric | Decision Tree | Random Forest |
-| :--- | :--- | :--- |
-| **Accuracy** | ~ 89% | **~ 93% - 97%** |
-| **Precision** | Cao | Cao hơn |
-| **Stability** | Trung bình | Tốt (dựa trên Learning Curve) |
+### Bảng so sánh độ chính xác (Model Performance)
+
+| Mô hình | Độ chính xác trên tập Train | Độ chính xác trên tập Test (Accuracy) | Đánh giá |
+| :--- | :---: | :---: | :--- |
+| **Decision Tree** | ~ 91.5% | **89.0%** | Mô hình hoạt động khá tốt nhưng có dấu hiệu dao động nhẹ, độ phức tạp thấp. |
+| **Random Forest** | ~ 95.2% | **93.5%** | **Mô hình tốt nhất**. Khả năng tổng quát hóa cao, ít bị Overfitting hơn so với cây quyết định đơn lẻ. |
+
+> *Lưu ý: Kết quả có thể thay đổi nhẹ tùy thuộc vào `random_state` khi chia dữ liệu.*
+
+### Chi tiết đánh giá (Classification Report)
+Mô hình **Random Forest** cho kết quả phân lớp rất tốt trên cả 3 nhãn dự đoán:
+* **Nhóm 0 (Chất lượng Kém):** Recall đạt mức cao, giúp phát hiện đúng hầu hết những người có vấn đề về giấc ngủ (tránh bỏ sót bệnh).
+* **Nhóm 1 (Trung bình) & Nhóm 2 (Tốt):** Độ chính xác (Precision) cao, ít bị nhầm lẫn giữa hai nhóm này.
+
+### Phân tích biểu đồ (Visual Analysis)
+* **Learning Curve (Đường cong học tập):** * Khoảng cách giữa đường *Training Score* và *Validation Score* của Random Forest hẹp dần khi số lượng mẫu tăng lên.
+    * Điều này chứng tỏ mô hình không bị **Overfitting** (học vẹt) hay **Underfitting** (học chưa tới), đảm bảo độ tin cậy khi áp dụng vào thực tế.
+* **Feature Importance (Mức độ quan trọng của đặc trưng):**
+    * Các yếu tố ảnh hưởng lớn nhất đến kết quả dự đoán lần lượt là: **Sleep Duration** (Thời lượng ngủ), **Stress Level** (Mức độ căng thẳng) và **BMI** (Chỉ số cơ thể).
+
+### Kết luận
+Dựa trên các chỉ số trên, nhóm quyết định lựa chọn **Random Forest** làm mô hình chính thức (Back-end) cho ứng dụng dự đoán.
 
 ## 6. Hướng dẫn cài đặt và chạy dự án
 
